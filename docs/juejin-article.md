@@ -363,3 +363,5 @@ span_finished  span={'name': 'analytics_converge_llm', 'duration_ms': 19384.83, 
 ---
 
 *项目使用 Python 3.12 + LangGraph + Claude Sonnet，全部数据为虚拟平台仿真，无任何真实业务数据。*
+
+*源码: [github.com/wheningo/vcr-ops-agent](https://github.com/wheningo/vcr-ops-agent)*
