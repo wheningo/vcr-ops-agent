@@ -1,0 +1,92 @@
+quality_cases:
+  # ─── 巡检分类 ───────────────────────────────────────────
+  - id: "q_insp_01"
+    name: "典型异常：音频质量劣化"
+    seed: 7
+    description: "房间 room_002 音频卡顿，用户流失率飙升"
+    expected_anomaly: true
+    expected_severity: "high"
+    expected_cause_category: "音频故障"
+    difficulty: "easy"
+
+  - id: "q_insp_02"
+    name: "典型异常：主播挂机"
+    seed: 15
+    description: "房间 room_001 主播长时间无互动，互动分骤降"
+    expected_anomaly: true
+    expected_severity: "high"
+    expected_cause_category: "主播低迷"
+    difficulty: "easy"
+
+  - id: "q_insp_03"
+    name: "正常平台无异常"
+    seed: 100
+    description: "平台所有指标正常，无告警"
+    expected_anomaly: false
+    expected_severity: "info"
+    expected_cause_category: "无"
+    difficulty: "easy"
+
+  - id: "q_insp_04"
+    name: "假阳性陷阱：活动期礼物正常陡增"
+    seed: 33
+    description: "平台正在进行周年庆活动，礼物量和在线人数正常上涨，不应触发异常"
+    expected_anomaly: false
+    expected_severity: "info"
+    expected_cause_category: "无"
+    difficulty: "hard"
+
+  - id: "q_insp_05"
+    name: "多房间同时劣化"
+    seed: 2
+    description: "健康分低但无告警，可能是平台级基础设施问题的早期信号"
+    expected_anomaly: false
+    expected_severity: "info"
+    expected_cause_category: "无"
+    difficulty: "medium"
+
+  # ─── 根因分析 ───────────────────────────────────────────
+  - id: "q_anly_01"
+    name: "音频编解码故障"
+    seed: 7
+    focus_room: "room_002"
+    description: "用户流失率高，audio_error_rate飙升，audio_quality骤降，主播活跃度正常"
+    expected_anomaly: true
+    expected_cause_category: "音频故障"
+    difficulty: "easy"
+
+  - id: "q_anly_02"
+    name: "主播状态低迷"
+    seed: 13
+    focus_room: "room_003"
+    description: "互动分低，主播开麦时长和活跃度骤降，音频质量正常"
+    expected_anomaly: true
+    expected_cause_category: "主播低迷"
+    difficulty: "easy"
+
+  - id: "q_anly_03"
+    name: "刷量套利：礼物数据异常但用户正常"
+    seed: 5
+    focus_room: "room_001"
+    description: "gift_concentration和new_device_ratio异常高，真实互动数据正常，疑似机器刷量"
+    expected_anomaly: true
+    expected_cause_category: "刷量套利"
+    difficulty: "hard"
+
+  - id: "q_anly_04"
+    name: "挂机刷在线时长"
+    seed: 10
+    focus_room: "room_004"
+    description: "occupancy高但msg_rate和interaction_rate接近0，voice_active_ratio极低"
+    expected_anomaly: true
+    expected_cause_category: "挂机刷在线"
+    difficulty: "hard"
+
+  - id: "q_anly_05"
+    name: "网络抖动导致短暂用户流失"
+    seed: 20
+    focus_room: "room_005"
+    description: "latency_variance_ms和packet_loss_rate异常，jitter_burst_count高，短时波动"
+    expected_anomaly: true
+    expected_cause_category: "网络抖动"
+    difficulty: "medium"
